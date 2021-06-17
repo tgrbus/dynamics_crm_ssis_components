@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DiscoveryService" targetNamespace="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IDiscoveryService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <ms-xrm:AuthenticationPolicy xmlns:ms-xrm="http://schemas.microsoft.com/xrm/2011/Contracts/Services">
+          <ms-xrm:Authentication>Federation</ms-xrm:Authentication>
+          <ms-xrm:SecureTokenService>
+            <ms-xrm:Identifier>http://sts.hteronet.ba/adfs/services/trust</ms-xrm:Identifier>
+          </ms-xrm:SecureTokenService>
+        </ms-xrm:AuthenticationPolicy>
+        <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:IssuedToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+              <Issuer xmlns="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+                <Address xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</Address>
+                <Metadata xmlns="http://www.w3.org/2005/08/addressing">
+                  <Metadata xmlns="http://schemas.xmlsoap.org/ws/2004/09/mex">
+                    <wsx:MetadataSection xmlns="">
+                      <wsx:MetadataReference>
+                        <Address xmlns="http://www.w3.org/2005/08/addressing">https://sts.hteronet.ba/adfs/services/trust/mex</Address>
+                      </wsx:MetadataReference>
+                    </wsx:MetadataSection>
+                  </Metadata>
+                </Metadata>
+              </Issuer>
+              <sp:RequestSecurityTokenTemplate>
+                <trust:KeyType xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">http://docs.oasis-open.org/ws-sx/ws-trust/200512/SymmetricKey</trust:KeyType>
+                <trust:KeySize xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">256</trust:KeySize>
+                <trust:Claims Dialect="http://schemas.xmlsoap.org/ws/2005/05/identity" xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">
+                  <wsid:ClaimType Uri="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn" xmlns:wsid="http://schemas.xmlsoap.org/ws/2005/05/identity" />
+                </trust:Claims>
+                <trust:KeyWrapAlgorithm xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p</trust:KeyWrapAlgorithm>
+                <trust:EncryptWith xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">http://www.w3.org/2001/04/xmlenc#aes256-cbc</trust:EncryptWith>
+                <trust:SignWith xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">http://www.w3.org/2000/09/xmldsig#hmac-sha1</trust:SignWith>
+                <trust:CanonicalizationAlgorithm xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">http://www.w3.org/2001/10/xml-exc-c14n#</trust:CanonicalizationAlgorithm>
+                <trust:EncryptionAlgorithm xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">http://www.w3.org/2001/04/xmlenc#aes256-cbc</trust:EncryptionAlgorithm>
+              </sp:RequestSecurityTokenTemplate>
+              <wsp:Policy>
+                <sp:RequireInternalReference />
+              </wsp:Policy>
+            </sp:IssuedToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust13 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust13>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.microsoft.com/xrm/2011/Contracts" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/xrm/2011/Contracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="DiscoveryServiceFault">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:BaseServiceFault">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="InnerFault" nillable="true" type="tns:DiscoveryServiceFault" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="DiscoveryServiceFault" nillable="true" type="tns:DiscoveryServiceFault" />
+      <xs:complexType name="BaseServiceFault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActivityId" type="ser:guid" />
+          <xs:element minOccurs="0" name="ErrorCode" type="xs:int" />
+          <xs:element minOccurs="0" name="ErrorDetails" nillable="true" type="tns:ErrorDetailCollection" />
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="BaseServiceFault" nillable="true" type="tns:BaseServiceFault" />
+      <xs:complexType name="ErrorDetailCollection">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" maxOccurs="unbounded" name="KeyValuePairOfstringanyType" type="q1:KeyValuePairOfstringanyType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ErrorDetailCollection" nillable="true" type="tns:ErrorDetailCollection" />
+      <xs:complexType name="OrganizationServiceFault">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:BaseServiceFault">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ExceptionRetriable" type="xs:boolean" />
+              <xs:element minOccurs="0" name="ExceptionSource" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="InnerFault" nillable="true" type="tns:OrganizationServiceFault" />
+              <xs:element minOccurs="0" name="OriginalException" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="TraceText" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="OrganizationServiceFault" nillable="true" type="tns:OrganizationServiceFault" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Collections.Generic" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="KeyValuePairOfstringanyType">
+        <xs:annotation>
+          <xs:appinfo>
+            <GenericType Name="KeyValuePairOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+              <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+              <GenericParameter Name="anyType" Namespace="http://www.w3.org/2001/XMLSchema" />
+            </GenericType>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element name="key" nillable="true" type="xs:string" />
+          <xs:element name="value" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="KeyValuePairOfstringanyType" nillable="true" type="tns:KeyValuePairOfstringanyType" />
+      <xs:complexType name="KeyValuePairOfEndpointTypestringztYlk6OT">
+        <xs:annotation>
+          <xs:appinfo>
+            <GenericType Name="KeyValuePairOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+              <GenericParameter Name="EndpointType" Namespace="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" />
+              <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+            </GenericType>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="key" type="q1:EndpointType" />
+          <xs:element name="value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="KeyValuePairOfEndpointTypestringztYlk6OT" nillable="true" type="tns:KeyValuePairOfEndpointTypestringztYlk6OT" />
+    </xs:schema>
+    <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Execute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" minOccurs="0" name="request" nillable="true" type="q1:DiscoveryRequest" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="DiscoveryRequest">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="DiscoveryRequest" nillable="true" type="q2:DiscoveryRequest" />
+      <xs:complexType name="RetrieveUserIdByExternalIdRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q3="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" base="q3:DiscoveryRequest">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="OrganizationId" type="ser:guid" />
+              <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Release" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element xmlns:q4="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="RetrieveUserIdByExternalIdRequest" nillable="true" type="q4:RetrieveUserIdByExternalIdRequest" />
+      <xs:complexType name="RetrieveOrganizationRequestModel">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q5="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" base="q5:DiscoveryRequest">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="AccessType" type="q5:EndpointAccessType" />
+              <xs:element minOccurs="0" name="Release" type="q5:OrganizationRelease" />
+              <xs:element minOccurs="0" name="UniqueName" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element xmlns:q6="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="RetrieveOrganizationRequestModel" nillable="true" type="q6:RetrieveOrganizationRequestModel" />
+      <xs:simpleType name="EndpointAccessType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Default" />
+          <xs:enumeration value="Internet" />
+          <xs:enumeration value="Intranet" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element xmlns:q7="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="EndpointAccessType" nillable="true" type="q7:EndpointAccessType" />
+      <xs:simpleType name="OrganizationRelease">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Current" />
+          <xs:enumeration value="V5" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element xmlns:q8="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="OrganizationRelease" nillable="true" type="q8:OrganizationRelease" />
+      <xs:complexType name="RetrieveOrganizationsRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q9="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" base="q9:DiscoveryRequest">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="AccessType" type="q9:EndpointAccessType" />
+              <xs:element minOccurs="0" name="IsInternalCrossGeoServerRequest" type="xs:boolean" />
+              <xs:element minOccurs="0" name="Release" type="q9:OrganizationRelease" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element xmlns:q10="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="RetrieveOrganizationsRequest" nillable="true" type="q10:RetrieveOrganizationsRequest" />
+      <xs:element name="ExecuteResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" minOccurs="0" name="ExecuteResult" nillable="true" type="q11:DiscoveryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="DiscoveryResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:element xmlns:q12="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="DiscoveryResponse" nillable="true" type="q12:DiscoveryResponse" />
+      <xs:complexType name="RetrieveOrganizationsResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q13="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" base="q13:DiscoveryResponse">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Details" nillable="true" type="q13:OrganizationDetailCollection" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element xmlns:q14="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="RetrieveOrganizationsResponse" nillable="true" type="q14:RetrieveOrganizationsResponse" />
+      <xs:complexType name="OrganizationDetailCollection">
+        <xs:sequence>
+          <xs:element xmlns:q15="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" minOccurs="0" maxOccurs="unbounded" name="OrganizationDetail" nillable="true" type="q15:OrganizationDetail" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element xmlns:q16="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="OrganizationDetailCollection" nillable="true" type="q16:OrganizationDetailCollection" />
+      <xs:complexType name="OrganizationDetail">
+        <xs:sequence>
+          <xs:element xmlns:q17="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" minOccurs="0" name="Endpoints" nillable="true" type="q17:EndpointCollection" />
+          <xs:element minOccurs="0" name="FriendlyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganizationId" type="ser:guid" />
+          <xs:element minOccurs="0" name="OrganizationVersion" nillable="true" type="xs:string" />
+          <xs:element xmlns:q18="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" minOccurs="0" name="State" type="q18:OrganizationState" />
+          <xs:element minOccurs="0" name="UniqueName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UrlName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element xmlns:q19="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="OrganizationDetail" nillable="true" type="q19:OrganizationDetail" />
+      <xs:complexType name="EndpointCollection">
+        <xs:sequence>
+          <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" maxOccurs="unbounded" name="KeyValuePairOfEndpointTypestringztYlk6OT" type="q20:KeyValuePairOfEndpointTypestringztYlk6OT" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element xmlns:q21="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="EndpointCollection" nillable="true" type="q21:EndpointCollection" />
+      <xs:simpleType name="EndpointType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="OrganizationService" />
+          <xs:enumeration value="OrganizationDataService" />
+          <xs:enumeration value="WebApplication" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element xmlns:q22="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="EndpointType" nillable="true" type="q22:EndpointType" />
+      <xs:simpleType name="OrganizationState">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Enabled" />
+          <xs:enumeration value="Disabled" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element xmlns:q23="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="OrganizationState" nillable="true" type="q23:OrganizationState" />
+      <xs:complexType name="RetrieveOrganizationResponseModel">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q24="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" base="q24:DiscoveryResponse">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Detail" nillable="true" type="q24:OrganizationDetail" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element xmlns:q25="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="RetrieveOrganizationResponseModel" nillable="true" type="q25:RetrieveOrganizationResponseModel" />
+      <xs:complexType name="RetrieveUserIdByExternalIdResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension xmlns:q26="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" base="q26:DiscoveryResponse">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element xmlns:q27="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery" name="RetrieveUserIdByExternalIdResponse" nillable="true" type="q27:RetrieveUserIdByExternalIdResponse" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IDiscoveryService_Execute_InputMessage">
+    <wsdl:part name="parameters" element="tns:Execute" />
+  </wsdl:message>
+  <wsdl:message name="IDiscoveryService_Execute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDiscoveryService_Execute_DiscoveryServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.microsoft.com/xrm/2011/Contracts" name="detail" element="q5:DiscoveryServiceFault" />
+  </wsdl:message>
+  <wsdl:portType name="IDiscoveryService">
+    <wsdl:operation name="Execute">
+      <wsdl:input wsaw:Action="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery/IDiscoveryService/Execute" message="tns:IDiscoveryService_Execute_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery/IDiscoveryService/ExecuteResponse" message="tns:IDiscoveryService_Execute_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery/IDiscoveryService/ExecuteDiscoveryServiceFaultFault" name="DiscoveryServiceFaultFault" message="tns:IDiscoveryService_Execute_DiscoveryServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IDiscoveryService" type="tns:IDiscoveryService">
+    <wsp:PolicyReference URI="#CustomBinding_IDiscoveryService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Execute">
+      <soap12:operation soapAction="http://schemas.microsoft.com/xrm/2011/Contracts/Discovery/IDiscoveryService/Execute" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DiscoveryServiceFaultFault">
+        <soap12:fault use="literal" name="DiscoveryServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DiscoveryService">
+    <wsdl:port name="CustomBinding_IDiscoveryService" binding="tns:CustomBinding_IDiscoveryService">
+      <soap12:address location="https://crm.hteronet.ba/XRMServices/2011/Discovery.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://crm.hteronet.ba/XRMServices/2011/Discovery.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

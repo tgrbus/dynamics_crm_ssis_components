@@ -1,0 +1,50 @@
+SecurityProtocolType enum
+-----------------
+Ssl3 = 48
+Tls = 192
+Tls11 = 768
+Tls12 = 3072
+
+FetchXML aggregates
+-sum -originalni tip
+-avg -originalni tip
+-min -originalni tip
+-max -originalni tip
+-count -int
+-countcolumn -int
+
+-group by: -originalni tip
+	dategrouping: - int
+
+
+WebAPI
+--------
+- certificate:
+	- Authorization Server URL
+	- Client App Id
+	- CRM Server URL
+	
+	- Certificate Thumbprint
+- password:
+	- Authorization Server URL (https://login.microsoftonline.com)
+	- Client App Id
+	- CRM Server URL
+	
+	- CRM Discovery Server
+	- User Name
+	- Password
+	- Organization
+- client credentials (server to server)
+	- Authorization Server URL
+	- Client App Id
+	- CRM Server URL
+	
+	- Client Secret
+
+grpSoap, grpRest
+	x: 0
+	y: 94
+grpPass, grpCert, grpClient
+	x: 0
+	y: 204
+	

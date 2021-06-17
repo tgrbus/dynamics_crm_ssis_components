@@ -1,0 +1,16 @@
+updating lookup with not null: "[ODataName]@odata.bind": "/[EntitySetName]([guid])"
+{
+  "tg_singlelineoftext": "01 - Sep 10 2020  7:33PM",
+  "tg_Lookup@odata.bind": "/contacts(2ba17064-1ae7-e611-80f4-e0071b661f01)",
+  "accountid": "9cdd3ac3-94bf-ea11-a813-000d3ab814f5"
+}
+
+updating lookup with null value: "_[LogicalName]_value": null, header: AutoDisassociate: true
+{
+  "tg_singlelineoftext": "02 - Sep 10 2020  7:33PM",
+  "_tg_lookup_value": null,
+  "accountid": "90dd3ac3-94bf-ea11-a813-000d3ab814f5"
+}
+
+lookup as alternate key: _[LogicalName]_value=[guid]
+https://crm047725.crm4.dynamics.com/api/data/v9.1/accounts(_tg_lookup_value=2ba17064-1ae7-e611-80f4-e0071b661f01) HTTP/1.1

@@ -1,0 +1,108 @@
+- što kad je vrijednost lookup traženja null (attribute is null, name is null)
+- zamijeniti 100-tke sa 130
+- dodati kvačicu za CRM GUID output na destination
+- dodati error output na destination
+- retrieve allatrributes zamijeniti s retrieveentityrequest
+- ako se odabere delete, iz combo boxa treba maknuti alternate key
+- multiple inputs
+- greška kod upsert with alternate key (sequence contains no matching element, vidi eronet/kcell pumpa na mom laptopu, ic_sales_point)
+- automatsko mapiranje ulaza na izlaz u destination component
+- staviti u prikaz (dgv) kod log. naziva lookup-a i na koji entite gleda, duljina stringa, precision, itd -> napraviti novi computed property na CrmAttribute
+- provjeriti za crm tip 'Memo' da li je ok AttributeXml() i QueryXml()
+- kod retrieve entity request, uz popis atributa dobijem i popis opcija option seta -> provjeriti i za globalni
+- treba paziti na verziju crm-a (alternativni ključevi, multiple option set)
+- podesiti da crm source pušta n po n recorda, gdje je n = min(DefaultBufferMaxRows, DefaultBufferSize) od Data Flow Taska
+- javlja exception kad brišem ulaz u destination component
+- dodavati i micati ulaze i kad se samo promijene ulazne kolone u destination component 
+- automatski mapirani kolone
+- posložiti da mi se mijenjaju crm polja u destinationu, ovisno da li je operacije Create ili Update (statecode je primjer)
+- staviti opciju da ignorira null polja
+- optionset maping po imenu, mogućnost za autocreate nove optionset opcije
+- možda dodati display name uz logical name na komponente
+- dodati u source i destination da provjerava ispravnost connection componente (connection stringa)
+- fali primary key u destination editoru/valid for read, valid for update, etc...
+- podesiti da se iz SourceComponenta može napraviti novi CrmConnection
+- Refresh CRM metadata: ne updatea alterante key
+- kod Destinationa staviti mogućnost i kad nije tekst lookup nego guid da se zanemari ako ga ne pronađe ili da se postavi null
+- execute workflow na destinationu
+- source mi ne dohvaća audit
+- override validate na destinationu
+- kod sourca i destinationa pokušati da se ne brišu odabrane kolone kad se promijeni connection manager
+- kad se promijeni source, da se ne brišu kolone i sve ostalo
+- ne refreshaju se izlazi, kad se na ulaz dođe nova kolona
+- nekakav bug kada ne pušta kolonu u destinationu kod Hide Mapped i Hide Unmapped
+- destination napraviti remove invalid characters
+- napraviti ignore unchanged fields
+- podešavanje datuma: datum, datum/vrijeme, local time, utc time
+- promijeniti kod alternate key da KeyCOlumns bude List<string> a ne List<CrmAttribute>
+- zamijeniti dugačke stringove sa StringBuilder (uključujući kreiranje soap headera)
+- source component batch size i max record count textboxove popraviti validaciju
+- potpuno refaktorirati kreiranje headera za online i ifd
+- kod source component staviti select all i deselect all
+- error kod odabira atributa u source component (ne prihvati novi izbor kolona)
+- na svim komponentama da combo box radi svuda a ne samo na strelici
+- crm destination mi se dugo smrzne kad ga otvorim (na RWE)
+- crm source: multiple line of text -> dt_ntext
+- delete
+- attribute lookup manual matching i preradi id manual mathcing => napraviti distinct, eventualno dohvaćati sve rekorde, optimizirati paralelno multithread retrieve i update
+- filtriranje/search kolona
+- kad na intersection entitetu promijenim s update na create, ne pojave se lookup polja
+- kad se naknadno dodaju kolone na ulaz destinationa puca (specified cast is not valid)
+- kad promijenim operaciju (npr. create->upsert) pa stisnem refresh pojave mi se nova polja
+- kod lookup forme mi ne ostane Primary Key nego se vrati na Manual
+- kad ispred destinationa izbrišem kolonu iz nekog oledb sourca ostane mi ta kolona u destinationu (advanced editoru)
+- source stalno javlja da organization nije selected
+- provjeriti refresh metadata na destionationu, događa se na RWE da se sve pobriše
+- raširiti malo kolonu za ssis input u destinationu
+
+---------------- prerada u synchronous destination --------------------
+- osigurati da su svi mapirani ulazi u InputColumnCollection: DestinationComponentEditor.SetInputs(), uključujući kolone u lookup i primary key mapinzima
+-----------------------------------------------------------------------
+
+- popuniti Parameters klasu i zamijeniti sve stringove svuda
+- kod Merge dodati upozorenje da nisu popunjena obavezna polja
+- kod Merge dodati mogućnost manual lookupa -> computed lookup
+- validacija stringa DefaultValue kod manual matching na LookupForm, može biti NULL, null, ili GUID
+- validacija na Destination da ne prolazi ako nije jedna kolona, postavljen primary ili alternate key...
+- kad postavim connection, automatski se postavi update, ja odaberem create i ne prikaže se span_origin_contact
+- connection string spremati kao json?
+- kod refresh CRM metadata treba refreshati i alternate ključeve
+- kad se maknu kolone iz ulaza javlja grešku
+- opet zajebava connection na online -> postaviti http option
+- riješiti spremanje posebnih znakova u passwordu (XML encode)
+- sakriti password iz connection stringa
+- refresh metadata za alternativne ključeve
+- activitytypecodename moram dohvaćati iz formated values (SOAP)
+- napraviti error handling (try-catch) ako je redirect error
+- napravit cast iz int, decimal, string u bool
+- napraviti riječnik
+- ako nema connectiona u paketu sve se sruši
+- u connectionu srediti automatsko podešavanje regije (probati se spojiti na Nandos sa crm4)
+- napraviti loading kursor na svim komponentama
+- staviti defaultni authorization server na https://login.microsoftonline.com/
+- kod SoapCrmCommands dodati:
+	- RetrieveEntityList: popuniti EntitySetName
+	- RetrieveAttributesList: popuniti ReferencingEntityNavigationPropertyName
+- provjeriti da se RetrieveAttributesList nigdje ne poziva s praznim EntityModelom
+- source s fetchxml-om: ne radi count="1"
+- proučiti što se događa ako je value jednog ili više polja alternativnog ključa null -> za sada bacam grešku
+- SoapCrmCommands: FindRecordIdByMatching: default value maknuti, PrepareLookups: dodati default value
+- nisam napravio FindRecordIdByMatching(soap, rest) za party list
+- nisam napravio FindRecordIdByMatching(soap) za multiselect option set
+- da li će multithread aplikacija proizvoditi iste GUIDe za batcheve i changesetove?
+- za sve rest batch requeste moram handlati error kad je http status kod različit od 200
+- RetrieveAllByFetch -> treba parsati string error ako postoji
+- FindRecordIdByMatching -> napraviti distinct i na Soap i na Rest
+- na connectionu se ne refreshaju organizacije
+- provjeriti kemostik - find record by id matching ne updatea taj field
+- productstructure na product na Kemostik
+- upisati null na lookup (alternate key i manually)
+- ne radi NewConnection iz Source komponente
+- ne osvježavaju se organizacije kad mijenjam username i password na Connection
+- riješiti se FindRecordIdByMatching -> MultithreadObject.UpsertIntersect()
+- crm destination i lookup form - column grid da se raširi po vertikali i horizontali
+- lookup form- alternate key i manual -> input column poredati po abecedi
+
+- crm source staviti texarea za fetch xml da se rasteže
+
+- HG trade, s3_financial_data ili bilo koji drugi -> Hide Unmaped swithcing mijenjaju se kolone -> prikaže se modifiedon na upsert

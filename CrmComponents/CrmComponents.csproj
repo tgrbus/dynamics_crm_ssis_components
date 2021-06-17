@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C4ACD30-DB31-4F1A-AA40-A1D95EAC0626}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CrmComponents</RootNamespace>
+    <AssemblyName>CrmComponents</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>default</LangVersion>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ssis.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.Dts.Design, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dllovi\12\Microsoft.SqlServer.Dts.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\dllovi\12\Microsoft.SqlServer.DTSPipelineWrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\dllovi\12\x32\Microsoft.SqlServer.DTSRuntimeWrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dllovi\12\Microsoft.SqlServer.ManagedDTS.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dllovi\12\Microsoft.SqlServer.PipelineHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\DiscoveryADFS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DiscoveryADhttps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DiscoveryAD\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Discovery_92_Online\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Organization_91_Online\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="CrmConnection.cs" />
+    <Compile Include="CrmConnectionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrmConnectionEditor.Designer.cs">
+      <DependentUpon>CrmConnectionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrmConnectionInterface.cs" />
+    <Compile Include="DestinationComponent.cs" />
+    <Compile Include="DestinationComponentEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DestinationComponentInterface.cs" />
+    <Compile Include="HashComponent.cs" />
+    <Compile Include="Helpers\Enums\ActivityPartyTypeEnum.cs" />
+    <Compile Include="Helpers\NumberFormat.cs" />
+    <Compile Include="LookupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookupForm.Designer.cs">
+      <DependentUpon>LookupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AlternateKey.cs" />
+    <Compile Include="Model\AlternateKeyException.cs" />
+    <Compile Include="Model\AttributeHelpers.cs" />
+    <Compile Include="Model\AttributeMatchingRequestModel.cs" />
+    <Compile Include="Helpers\Enums\AttributeTypeEnum.cs" />
+    <Compile Include="Model\CashedOutputColumn.cs" />
+    <Compile Include="Model\Connection.cs" />
+    <Compile Include="Helpers\Enums\ComplexMappingEnum.cs" />
+    <Compile Include="Helpers\Enums\ConnectionTypeEnum.cs" />
+    <Compile Include="Model\CrmAttribute.cs" />
+    <Compile Include="Model\CrmRow.cs" />
+    <Compile Include="Model\CrmSsisTypeMapping.cs" />
+    <Compile Include="Model\CrmColumn.cs" />
+    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\EntityModel.cs" />
+    <Compile Include="Model\CrmCommands.cs" />
+    <Compile Include="Helpers\Enums\Dictionaries.cs" />
+    <Compile Include="Helpers\Enums\EndpointTypeEnum.cs" />
+    <Compile Include="Helpers\Enums\ErrorHandlingEnum.cs" />
+    <Compile Include="Helpers\Enums\MatchingEnum.cs" />
+    <Compile Include="Helpers\Enums\MethodNameEnum.cs" />
+    <Compile Include="Helpers\Enums\OperationTypeEnum.cs" />
+    <Compile Include="Helpers\Enums\ServiceTypeEnum.cs" />
+    <Compile Include="Model\FetchBatch.cs" />
+    <Compile Include="Model\FetchXmlHelpers.cs" />
+    <Compile Include="Model\Lookup.cs" />
+    <Compile Include="Model\ModifiedAttribute.cs" />
+    <Compile Include="Model\LookupMatch.cs" />
+    <Compile Include="Model\MultithreadAttributeManual.cs" />
+    <Compile Include="Model\MultiThreadObject.cs" />
+    <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\OrganizationRequestModel.cs" />
+    <Compile Include="Model\OrganizationResponseModel.cs" />
+    <Compile Include="Model\Parameters.cs" />
+    <Compile Include="Model\Relationship.cs" />
+    <Compile Include="Model\SsisInput.cs" />
+    <Compile Include="Model\SsisVariable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rest\RestCrmCommands.cs" />
+    <Compile Include="Rest\RestHelpers.cs" />
+    <Compile Include="Rest\RestHttpResponse.cs" />
+    <Compile Include="Soap\SoapCrmCommands.cs" />
+    <Compile Include="Soap\SoapExtensions.cs" />
+    <Compile Include="Soap\TransportLayer.cs" />
+    <Compile Include="SourceComponent.cs" />
+    <Compile Include="SourceComponentEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SourceComponentInterface.cs" />
+    <Compile Include="UpdatedAttributesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdatedAttributesForm.Designer.cs">
+      <DependentUpon>UpdatedAttributesForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DiscoveryADFS\CrmComponents.DiscoveryADFS.DiscoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DiscoveryADFS\DiscoveryService.wsdl" />
+    <None Include="Connected Services\DiscoveryADhttps\CrmComponents.DiscoveryADhttps.DiscoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DiscoveryADhttps\DiscoveryService.wsdl" />
+    <None Include="Connected Services\DiscoveryAD\configuration91.svcinfo" />
+    <None Include="Connected Services\DiscoveryAD\configuration.svcinfo" />
+    <None Include="Connected Services\DiscoveryAD\CrmComponents.DiscoveryAD.DiscoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DiscoveryAD\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\DiscoveryADhttps\configuration91.svcinfo" />
+    <None Include="Connected Services\DiscoveryADhttps\configuration.svcinfo" />
+    <None Include="Connected Services\DiscoveryADhttps\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\DiscoveryADFS\configuration91.svcinfo" />
+    <None Include="Connected Services\DiscoveryADFS\configuration.svcinfo" />
+    <None Include="Connected Services\DiscoveryADFS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\Discovery_92_Online\CrmComponents.Discovery_92_Online.DiscoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Discovery_92_Online\DiscoveryService.wsdl" />
+    <None Include="Connected Services\Discovery_92_Online\configuration91.svcinfo" />
+    <None Include="Connected Services\Discovery_92_Online\configuration.svcinfo" />
+    <None Include="Connected Services\Discovery_92_Online\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\Organization_91_Online\configuration91.svcinfo" />
+    <None Include="Connected Services\Organization_91_Online\configuration.svcinfo" />
+    <None Include="Connected Services\Organization_91_Online\CrmComponents.Organization_91_Online.Entity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Organization_91_Online\CrmComponents.Organization_91_Online.EntityCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Organization_91_Online\CrmComponents.Organization_91_Online.OrganizationResponseModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Organization_91_Online\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Icon1.ico" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DiscoveryAD\DiscoveryService.wsdl" />
+    <None Include="Connected Services\Organization_91_Online\OrganizationService.wsdl" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\CrmComponents.Model.AlternateKey.datasource" />
+    <None Include="Properties\DataSources\CrmComponents.Model.CrmAttribute.datasource" />
+    <None Include="Properties\DataSources\CrmComponents.Model.Entity.datasource" />
+    <None Include="Properties\DataSources\CrmComponents.Model.ModifiedAttribute.datasource" />
+    <None Include="Properties\DataSources\CrmComponents.Model.SsisInput.datasource" />
+    <None Include="Resources\Icon1.ico" />
+    <None Include="ssis.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CrmConnectionEditor.resx">
+      <DependentUpon>CrmConnectionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DestinationComponentEditor.resx">
+      <DependentUpon>DestinationComponentEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookupForm.resx">
+      <DependentUpon>LookupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SourceComponentEditor.resx">
+      <DependentUpon>SourceComponentEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdatedAttributesForm.resx">
+      <DependentUpon>UpdatedAttributesForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DiscoveryADFS\" />
+    <WCFMetadataStorage Include="Connected Services\DiscoveryADhttps\" />
+    <WCFMetadataStorage Include="Connected Services\DiscoveryAD\" />
+    <WCFMetadataStorage Include="Connected Services\Discovery_92_Online\" />
+    <WCFMetadataStorage Include="Connected Services\Organization_91_Online\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+@SET COMPONENTSDIR_01="C:\Program Files (x86)\Microsoft SQL Server\120\DTS\PipelineComponents\"
+@SET COMPONENTSDIR_64 = "C:\Program Files\Microsoft SQL Server\120\DTS\PipelineComponents\"
+@SET CONNECTIONSDIR= "C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Connections\"
+@SET CONNECTIONSDIR_64= "C:\Program Files\Microsoft SQL Server\120\DTS\Connections\"
+@SET GACUTIL="C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\gacutil.exe"
+Echo Instaling dll in GAC
+Echo $(OutDir)
+Echo $(TargetFileName)
+%25GACUTIL%25 -if "$(OutDir)$(TargetFileName)"
+Echo Copying files to Components 32bit
+copy "$(OutDir)$(TargetFileName)" %25COMPONENTSDIR_01%25
+Echo Copying files to Components 64bit
+copy "$(OutDir)$(TargetFileName)" %25COMPONENTSDIR64_01%25
+Echo Copying files to Connections 32bit
+copy "$(OutDir)$(TargetFileName)" %25CONNECTIONSDIR%25
+Echo Copying files to Connections 64bit
+copy "$(OutDir)$(TargetFileName)" %25CONNECTIONSDIR_64%25</PostBuildEvent>
+  </PropertyGroup>
+</Project>

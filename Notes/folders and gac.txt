@@ -1,0 +1,18 @@
+cd $(ProjectDir)
+@SET COMPONENTSDIR_01="C:\Program Files (x86)\Microsoft SQL Server\120\DTS\PipelineComponents\"
+@SET COMPONENTSDIR_64 = "C:\Program Files\Microsoft SQL Server\120\DTS\PipelineComponents\"
+@SET CONNECTIONSDIR= "C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Connections\"
+@SET CONNECTIONSDIR_64= "C:\Program Files\Microsoft SQL Server\120\DTS\Connections\"
+@SET GACUTIL="C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\gacutil.exe"
+Echo Instaling dll in GAC
+Echo $(OutDir)
+Echo $(TargetFileName)
+%GACUTIL% -if "$(OutDir)$(TargetFileName)"
+Echo Copying files to Components 32bit
+copy "$(OutDir)$(TargetFileName)" %COMPONENTSDIR_01%
+Echo Copying files to Components 64bit
+copy "$(OutDir)$(TargetFileName)" %COMPONENTSDIR64_01%
+Echo Copying files to Connections 32bit
+copy "$(OutDir)$(TargetFileName)" %CONNECTIONSDIR%
+Echo Copying files to Connections 64bit
+copy "$(OutDir)$(TargetFileName)" %CONNECTIONSDIR_64%
