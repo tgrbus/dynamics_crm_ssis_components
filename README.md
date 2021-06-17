@@ -1,4 +1,4 @@
-# dynamics_crm_ssis_components
+# dynamics crm ssis components
 
 Included Projects in solution:
 - ConsoleTestApp - project for testing CrmComponents
