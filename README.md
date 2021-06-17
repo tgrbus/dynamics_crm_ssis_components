@@ -1,9 +1,9 @@
 # dynamics_crm_ssis_components
 
 Included Projects in solution:
--ConsoleTestApp - project for testing CrmComponents
--CrmComponents - main project
--SetupProject2 - Wix/Windows Installer Package (.msi) - not working
+- ConsoleTestApp - project for testing CrmComponents
+- CrmComponents - main project
+- SetupProject2 - Wix/Windows Installer Package (.msi) - not working
 
 Setting up and building dll files:
 1) Add following dlls as references:
