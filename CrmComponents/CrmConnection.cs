@@ -12,10 +12,8 @@ using Microsoft.SqlServer.Dts.Runtime;
 namespace CrmComponents
 {
     [DtsConnection(ConnectionType = "CrmConnection", DisplayName = "Crm Connection", ConnectionContact = "TestComponent", Description = "Svasta",
-        /*IconResource = "CrmComponents.Resources.Icon1.ico", */
-        UITypeName = "CrmComponents.CrmConnectionInterface, CrmComponents, Version=1.2014.12.0, Culture=neutral, PublicKeyToken=81423fe9ba0539ea",
-        LocalizationType = typeof(CrmConnection)),
-    EditorBrowsable(EditorBrowsableState.Never)]
+         UITypeName = "CrmComponents.CrmConnectionInterface, CrmComponents, Version=1.2014.12.0, Culture=neutral, PublicKeyToken=81423fe9ba0539ea",
+        LocalizationType = typeof(CrmConnection)), EditorBrowsable(EditorBrowsableState.Never)]
     public class CrmConnection : ConnectionManagerBase, IDTSComponentPersist {
         #region Variables for internal use
         // The template for the connectionstring, but without the sensitive password property
