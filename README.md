@@ -5,6 +5,12 @@ Included Projects in solution:
 - CrmComponents - main project
 - SetupProject2 - Wix/Windows Installer Package (.msi) - not working
 
+## Open issues (TODO list)
+- OAuth2 login with certificate isn't implemented
+- Discovery Service SOAP endpoints for CRM online (https://disco.crmX.dynamics.com) are depricated by Microsoft, so SOAP connection in VS SSDT GUI will not work for SOAP online connection type
+- Automatic buils for more than one SQL Server versions are not implemented: one should manually set dll-s, AssemblyInfo and class attributes for every version of SQL Server
+- Windows Installer project is not implemented: one can only manually install CrmComponents.dll to GAC and then copy it to Program Files folders of SQL server
+
 ## SQL server versions
 |SQL Server version|Version number|
 |------------------|--------------|
@@ -15,7 +21,7 @@ Included Projects in solution:
 |SQL Server 2012   | 11           |
 |SQL Server 2008   | 10           |
 
-DLLs needed for SSIS project are in folder DLLs in the project https://github.com/tgrbus/dynamics_crm_ssis_components/tree/main/dllovi
+DLLs needed for SSIS project are in folder DLLs in the project https://github.com/tgrbus/dynamics_crm_ssis_components/tree/main/dlls
 
 ## Setting up and building project:
 1) Add following dlls as references:
@@ -57,12 +63,37 @@ DLLs needed for SSIS project are in folder DLLs in the project https://github.co
 
 5) Install CrmComponents.dll in GAC
 
-6) Copy CrmComponents.dll in x86 folders for Visual Studio/SQL Server Data Tools  
+6) Copy CrmComponents.dll in x86 folders for Visual Studio/SQL Server Data Tools:  
     %programfiles(x86)%\Microsoft SQL Server\130\DTS\PipelineComponents  
     and  
     %programfiles(x86)%\Microsoft SQL Server\130\DTS\Connections, where 130 is folder for SQL Server 2016, 140 for SQL Server 2017, etc..
 
-7) Copy CrmComponents.dll in x64 folders for running SSIS jobs in SQL Server Agent  
+7) Copy CrmComponents.dll in x64 folders for running SSIS jobs in SQL Server Agent:  
     %programfiles%\Microsoft SQL Server\130\DTS\PipelineComponents  
     and  
     %programfiles%\Microsoft SQL Server\130\DTS\Connections, where 130 is folder for SQL Server 2016, 140 for SQL Server 2017, etc..
+
+8) Open SQL Server Data Tools and create new or open existing SSIS project. Set SQL Server version -> right click on project in Solution Explorer -> Properties -> Configuration Properties -> General -> TargetServerVersion
+
+## For development computer - setting up Post-Build Event 
+CrmComponents -> Properties -> Build Events.  
+Have to run Visual Studio as Administrator.
+
+cd $(ProjectDir)  
+@SET COMPONENTSDIR="C:\Program Files (x86)\Microsoft SQL Server\120\DTS\PipelineComponents\"  
+@SET COMPONENTSDIR_64 = "C:\Program Files\Microsoft SQL Server\120\DTS\PipelineComponents\"  
+@SET CONNECTIONSDIR= "C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Connections\"  
+@SET CONNECTIONSDIR_64= "C:\Program Files\Microsoft SQL Server\120\DTS\Connections\"  
+@SET GACUTIL="C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\gacutil.exe"  
+Echo Instaling dll in GAC  
+Echo $(OutDir)  
+Echo $(TargetFileName)  
+%GACUTIL% -if "$(OutDir)$(TargetFileName)"  
+Echo Copying files to Components 32bit  
+copy "$(OutDir)$(TargetFileName)" %COMPONENTSDIR%  
+Echo Copying files to Components 64bit  
+copy "$(OutDir)$(TargetFileName)" %COMPONENTSDIR64_01%  
+Echo Copying files to Connections 32bit  
+copy "$(OutDir)$(TargetFileName)" %CONNECTIONSDIR%  
+Echo Copying files to Connections 64bit  
+copy "$(OutDir)$(TargetFileName)" %CONNECTIONSDIR_64%  
