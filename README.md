@@ -1,5 +1,11 @@
 # dynamics crm ssis components
 
+- Microsoft Dynamics CRM 2011, 2016, D365, Dataverse
+- SOAP 2011 endpoint, REST Web Api endpoint
+- SQL Server Integration Services
+
+![Image](/Images/crm_ssis_destination02.png)
+
 Included Projects in solution:
 - ConsoleTestApp - project for testing CrmComponents
 - CrmComponents - main project
@@ -97,3 +103,30 @@ Echo Copying files to Connections 32bit
 copy "$(OutDir)$(TargetFileName)" %CONNECTIONSDIR%  
 Echo Copying files to Connections 64bit  
 copy "$(OutDir)$(TargetFileName)" %CONNECTIONSDIR_64%  
+
+## Structure
+1) Crm Connection:
+    - CrmConnection.cs
+    - CrmConnectionEditor.cs
+    - CrmConnectionInterface.cs
+2) Destination Component:
+    - DestinationComponent.cs
+    - DestinationComponentEditor.cs
+    - DestinationComponentInterface.cs
+3) Source Component:
+    - SourceComponent.cs
+    - SourceComponentEditor.cs
+    - SourceComponentInterface.cs
+
+## Screenshots
+### Connection Component
+![Image](/Images/crm_ssis_connection01.png)
+
+### Destination Component
+![Image](/Images/crm_ssis_destination01.png)
+![Image](/Images/crm_ssis_destination03.png)
+
+### Source Component
+![Image](/Images/crm_ssis_source01.png)
+![Image](/Images/crm_ssis_source02.png)  
+![Image](/Images/crm_ssis_source03.png)
